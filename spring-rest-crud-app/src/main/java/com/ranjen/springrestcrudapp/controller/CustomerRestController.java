@@ -47,6 +47,36 @@ public class CustomerRestController {
 		return theCustomer;
 	}
 	
+	// add mapping for POST /customers  - add new customer
+	//TO TEST: Use POSTMAN , choose POST , paste the/customers url , click body tab and raw box,
+	//then select from dropdown JSON(application/json)
+	
+	//the add as following before send
+/*	
+ 	{
+		"firstName" : "Ranjen",
+		"lastName" : "Naidu",
+		"email" : "ranjennaidu@test.com"
+	}
+	*/
+	@PostMapping("/customers")
+	//now we can access the requestbody as POJO
+	public Customer addCustomer(@RequestBody Customer theCustomer) {
+		
+		// also just in case the pass an id in JSON ... set id to 0
+		//we use hibernate , using the method saveOrUpdate in DAO, so if it is set to 0
+		//hibernate will take it as empty or null which 
+		//this is force a save of new item ... instead of update
+		
+		theCustomer.setId(0);
+		
+		customerService.saveCustomer(theCustomer);
+		
+		return theCustomer;
+	}
+	
+
+	
 		
 	
 }
