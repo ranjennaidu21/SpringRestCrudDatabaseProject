@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,6 +74,30 @@ public class CustomerRestController {
 		customerService.saveCustomer(theCustomer);
 		
 		return theCustomer;
+	}
+	
+	// add mapping for PUT /customers - update existing customer
+	//TO TEST: Use POSTMAN , choose PUT , paste the/customers url , click body tab and raw box,
+	//then select from dropdown JSON(application/json)
+	
+	//LET UPDATE ID NO 9 
+	//the add as following before send
+/*	
+	{
+	    "id": 9,
+	    "firstName": "Kaala",
+	    "lastName": "Karikalan",
+	    "email": "k_kala@test.com"
+	}
+	*/
+	@PutMapping("/customers")
+	public Customer updateCustomer(@RequestBody Customer theCustomer) {
+		
+		//since customer id is set, DAO will update customer in the database
+		customerService.saveCustomer(theCustomer);
+		
+		return theCustomer;
+		
 	}
 	
 
