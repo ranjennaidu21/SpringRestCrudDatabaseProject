@@ -16,6 +16,24 @@ import com.ranjen.springrestcrudapp.entity.Customer;
 import com.ranjen.springrestcrudapp.error.exception.CustomerNotFoundException;
 import com.ranjen.springrestcrudapp.service.CustomerService;
 
+//Take note we have added Spring Security to secure the REST Endpoint.
+//So we need username and password to access the REST Endpoint.
+/*
+ Postman will prompt for new credentials for
+each REST request.
+1. Run your REST application.
+2. In Postman access the REST endpoint: GET /api/customers
+You will initial get a 401 error: Unauthorized
+3. To resolve this, in Postman, click the "Authorization" section of the request.
+4. In the "Type" drop-down list, select "Basic Auth"
+//Based on the username , there have different role which have access to certain function
+//refer to DemoSecurityConfig.java for that
+5. Enter user id: john, password: test123
+6. Using Postman send the request again
+If the user is authenticated, then they'll get the results of REST request. If not, they'll
+see a 401 error
+*/
+
 @RestController
 @RequestMapping("/api")
 public class CustomerRestController {
