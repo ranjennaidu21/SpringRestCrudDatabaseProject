@@ -3,6 +3,7 @@ package com.ranjen.springrestcrudapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -98,6 +99,27 @@ public class CustomerRestController {
 		
 		return theCustomer;
 		
+	}
+	
+	// add mapping for DELETE /customers/{customerId} - delete customer
+	//TO TEST: Use POSTMAN , choose DELETE , paste the/customers/8 url to delete customer
+	//id 8, click body tab and raw box,
+	//then select from dropdown JSON(application/json)
+	
+	@DeleteMapping("/customers/{customerId}")
+	public String deleteCustomer(@PathVariable int customerId) {
+		
+		Customer tempCustomer = customerService.getCustomer(customerId);
+		
+		// throw exception if Customer is null
+		
+		if (tempCustomer == null) {
+			throw new CustomerNotFoundException("Customer id not found - " + customerId);
+		}
+				
+		customerService.deleteCustomer(customerId);
+		
+		return "Deleted customer id - " + customerId;
 	}
 	
 
